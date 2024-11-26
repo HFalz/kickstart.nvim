@@ -230,13 +230,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
+    
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+  
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -254,6 +255,33 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    requires = { 'nvim-tree/nvim-web-devicons' },  -- Optional: for file icons
+    opts = {
+      auto_close = true,  -- Close when it's the last window
+      git = {
+        show_on_statusline = true,  -- Show git status in the tree
+      },
+    },
+  },
+  -- Go Language Server and Support
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      -- Go LSP configuration
+      local lspconfig = require('lspconfig')
+
+      lspconfig.gopls.setup({
+        on_attach = function(client, bufnr)
+          -- Add any Go-specific settings here if needed
+        end,
+        flags = {
+          debounce_text_changes = 150,
+        },
+      })
+    end
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
