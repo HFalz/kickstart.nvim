@@ -258,22 +258,10 @@ require('lazy').setup({
   },
   -- File Tree: nvim-tree.lua
   {
-    'nvim-tree/nvim-tree.lua',
-    requires = { 'nvim-tree/nvim-web-devicons' },  -- For icons
-    opts = {
-      auto_close = true,  -- Automatically close when it's the last window
-      git = {
-        enable = true,  -- Enable Git integration in nvim-tree
-        ignore = false,  -- Show git ignored files (optional)
-      },
-      view = {
-        width = 30,  -- Set the width of the file tree
-      },
-    },
-    config = function()
-      -- Optional: Keybinding to toggle file tree
-      vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-    end
+    "nvim-tree/nvim-tree.lua",
+    keys = {
+      {"n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true }}
+    }
   },
   -- Go Language Server and Support
   {
